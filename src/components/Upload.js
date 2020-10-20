@@ -1,10 +1,96 @@
-import React from 'react';
-import { Card } from 'semantic-ui-react';
+import React, { useEffect, useState } from 'react';
+import { Button, Card, Divider } from 'semantic-ui-react';
 import '../styles/upload.css';
 
+import Spinner from './Spinner';
+import TransferForm from './TransferForm';
+
 function Upload() {
+  const [complete, setComplete] = useState(false);
+  const [upload, setUpload] = useState(false);
+  const [file, setFile] = useState(null);
+  const [disableTransfer, setDisableTransfer] = useState(true);
+
+  useEffect(() => {
+    // when a file is uploaded allow the user to click the "transfer" button
+    if (file) {
+      setDisableTransfer(false);
+    } else {
+      setDisableTransfer(true);
+    }
+  }, [file]);
+
+  function handleTransfer() {
+    setUpload(true);
+    // simulate upload time with this timeout function
+    setTimeout(() => {
+      setUpload(false);
+      setComplete(true);
+    }, 2000);
+  }
+
   return (
-    <Card className="upload">
+    <Card className="upload">      
+      {upload ? (
+        <>
+          <Spinner upload={upload} />
+          <div className="upload-message">
+            <h2>Tranferring...</h2>
+            <p>
+              Sending 11 files to 4 recipients
+              <br />
+              648 mb of 1.8 GB Uploaded
+              <br />
+              33 minuntes remaining
+            </p>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="upload-file">
+            {complete ? (
+              <>
+                <div className="upload-message">
+                <h2>
+                  All Done!
+                </h2>
+                <Button
+                  content='Send Another'
+                  onClick={() => {
+                    setFile(null);
+                    setComplete(false);
+                  }} />
+            </div>
+              </>
+            ) : (
+              <>
+                <Button
+                  onClick={() => {
+                    // this would prompt a file select window to open.
+                    // on completion this variable would store the storage reference.
+                    setFile(true)
+                  }}
+                  icon='add circle' />
+                <div className="upload-message">
+                  <h2>
+                    Add your files
+                  </h2>
+                  <p>
+                    Or select a folder
+                  </p>
+                </div>
+              </>
+            )}
+          </div>
+          <TransferForm />
+        </>
+      )}
+      <Divider />
+      <Button
+        className="upload-button"
+        disabled={disableTransfer}
+        content={upload ? 'Cancel' : 'Transfer' }
+        onClick={handleTransfer} />
     </Card>
   );
 }

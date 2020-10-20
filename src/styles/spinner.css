@@ -1,0 +1,11 @@
+.spinner {
+  position: relative;
+  display: flex;
+  padding: 20px;
+  justify-content: center;
+}
+.spinner-count {
+  position: absolute;
+  top: 50%;
+  transform: translateY( -50% );
+}

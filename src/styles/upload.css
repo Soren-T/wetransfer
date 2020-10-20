@@ -1,6 +1,11 @@
 .upload {
-  position: absolute;
+  position: absolute !important;
   top: 50%;
-  transform: translateY( - 50% );
+  transform: translateY( -50% );
   left: 100px;
+}
+.upload-file {
+  padding: 20px;
+  display: flex;
+  justify-content: space-evenly;
 }

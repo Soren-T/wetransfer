@@ -1,7 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+// import styles
 import './styles/index.css';
-import 'semantic-ui-css/semantic.min.css'
+import 'semantic-ui-css/semantic.min.css';
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 
