@@ -6,9 +6,14 @@ import Spinner from './Spinner';
 import TransferForm from './TransferForm';
 
 function Upload() {
+  // boolean to signal the completion of an upload.
+  // This shows a relevant message and prompts the user to start over and transfer another file
   const [complete, setComplete] = useState(false);
+  // this boolean triggers the upload spinner and upload message to be shown.
   const [upload, setUpload] = useState(false);
+  // this boolean simulates a file being uploaded
   const [file, setFile] = useState(null);
+  // this boolean controls the tranfer button and the bottom of the form.
   const [disableTransfer, setDisableTransfer] = useState(true);
 
   useEffect(() => {
